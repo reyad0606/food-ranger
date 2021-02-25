@@ -1,16 +1,19 @@
 const express = require('express');
 
+const app = express();
+
 const mongoose = require('mongoose');
+
+const bodyParser = require('body-parser');
 
 require('dotenv/config');
 
-const app = express();
+app.use(bodyParser.json());
 
 //Routes
+const restaurantsRoute = require('./routes/restaurants');
 
-// mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true }, () =>
-//   console.log('connected to DB')
-// );
+app.use('/restaurants', restaurantsRoute);
 
 mongoose.connect(
   process.env.DB_CONNECTION,
